@@ -18,6 +18,7 @@ sanic-testing = "*"
 mypy = "*"
 mock = "*"
 types-mock = "*"
+fakeredis = "*"
 
 [pipenv]
 allow_prereleases = true
