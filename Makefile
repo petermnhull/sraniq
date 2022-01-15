@@ -1,12 +1,16 @@
 #!make
 
-run:
+server:
 	pipenv run python3 -m scripts.server 
+
+worker:
+	pipenv run python3 -m scripts.worker
+
+redis:
+	docker-compose up -d redis
 
 test:
 	pipenv run coverage run --source sraniq/ -m pytest tests/
-
-coverage: test
 	pipenv run coverage report
 
 black:
