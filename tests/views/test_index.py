@@ -1,11 +1,10 @@
 import json
 from sanic import Sanic
-import redis
+from fakeredis import FakeStrictRedis
 
 
-def test_app_healthy(app: Sanic):
+def test_index_healthy(app: Sanic):
     request, response = app.test_client.get("/")
-
     assert request.method.lower() == "get"
     assert response.status == 200
 
@@ -16,10 +15,10 @@ def test_app_healthy(app: Sanic):
     assert json.loads(response.body) == expected
 
 
-def test_app_redis_ping_fails(app: Sanic):
-    app.ctx.redis.ping.side_effect = redis.exceptions.ConnectionError
+def test_index_redis_ping_fails(app: Sanic):
+    redis = FakeStrictRedis(connected=False)
+    app.ctx.redis = redis
     _, response = app.test_client.get("/")
-
     assert response.status == 500
 
     expected = {

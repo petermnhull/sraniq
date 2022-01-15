@@ -1,4 +1,5 @@
 from dataclasses import dataclass, asdict
+
 from sanic.request import Request
 from sanic.views import HTTPMethodView
 from sanic.response import HTTPResponse, json
