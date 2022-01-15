@@ -5,6 +5,9 @@ name = "pypi"
 
 [packages]
 sanic = "*"
+rq = "*"
+redis = "*"
+types-redis = "*"
 
 [dev-packages]
 black = "*"
@@ -13,6 +16,8 @@ pytest = "*"
 coverage = "*"
 sanic-testing = "*"
 mypy = "*"
+mock = "*"
+types-mock = "*"
 
 [pipenv]
 allow_prereleases = true
