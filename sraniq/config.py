@@ -3,6 +3,8 @@ from dataclasses import dataclass
 import redis
 from redis import Redis
 
+TASK_QUEUE_NAME = "tasks"
+
 
 @dataclass(frozen=True)
 class AppConfig:
@@ -14,6 +16,8 @@ class AppConfig:
     redis_host: str
     redis_port: int
     redis_password: str
+
+    task_queue_name: str = TASK_QUEUE_NAME
 
     @classmethod
     def from_env(cls):

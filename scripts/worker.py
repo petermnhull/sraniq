@@ -14,7 +14,7 @@ def main():
     )
 
     with Connection():
-        queues = ["default"]
+        queues = [config.task_queue_name]
         w = Worker(queues, connection=redis)
         w.work()
 

@@ -21,14 +21,14 @@ class TaskViewPost:
 
 class TaskView(HTTPMethodView):
     def get(self, request: Request) -> HTTPResponse:
-        queue = Queue(name="default", connection=request.app.ctx.redis)
+        queue = Queue(name=request.app.ctx.config.task_queue_name, connection=request.app.ctx.redis)
         ids = queue.get_job_ids()
         response = TaskViewGet(ids)
         data = asdict(response)
         return json(data, 200)
 
     def post(self, request: Request) -> HTTPResponse:
-        queue = Queue(name="default", connection=request.app.ctx.redis)
+        queue = Queue(name=request.app.ctx.config.task_queue_name, connection=request.app.ctx.redis)
         task = Task("inject dependencies in here")
         job = queue.enqueue(task.run, 5)
         response = TaskViewPost(job.id)
