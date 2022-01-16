@@ -1,37 +1,38 @@
 import json
+from typing import Dict
 from sanic import Sanic
 
 
-def test_task_post(app: Sanic):
-    _, response = app.test_client.post("/task")
-    assert response.status == 202
+class TestTask:
+    @staticmethod
+    def test_post(app: Sanic):
+        _, response = app.test_client.post("/task")
+        assert response.status == 202
 
-    actual = json.loads(response.body)
-    assert actual["status"] == "queued"
-    assert not actual["result"]
+        actual = json.loads(response.body)
+        assert actual["id"]
 
+    @staticmethod
+    def test_get_no_tasks(app: Sanic):
+        _, response = app.test_client.get("/task")
+        assert response.status == 200
 
-def test_task_get(app: Sanic):
-    # Add job to queue
-    _, response = app.test_client.post("/task")
-    assert response.status == 202
+        actual = json.loads(response.body)
+        expected: Dict = {"ids": []}
+        assert actual == expected
 
-    # Find the job with get endpoint
-    post_response = json.loads(response.body)
-    job_id = post_response["job_id"]
-    _, response = app.test_client.get(f"/task?id={job_id}")
-    assert response.status == 200
+    @staticmethod
+    def test_get_with_tasks(app: Sanic):
+        # Create a new task
+        _, response = app.test_client.post("/task")
+        assert response.status == 202
+        post_response = json.loads(response.body)
+        id = post_response["id"]
 
-    # Check response is just queued, as there's no worker
-    get_response = json.loads(response.body)
-    assert get_response["job_id"] == job_id
-    assert get_response["status"] == "queued"
-    assert not get_response["result"]
+        # Find tasks
+        _, response = app.test_client.get("/task")
+        assert response.status == 200
 
-
-def test_task_get_no_job(app: Sanic):
-    _, response = app.test_client.get("/task?id=123abc")
-    assert response.status == 404
-
-    actual = json.loads(response.body)
-    assert actual["message"] == "no job associated to id"
+        actual = json.loads(response.body)
+        expected: Dict = {"ids": [id]}
+        assert actual == expected
