@@ -28,9 +28,9 @@ class AppConfig:
         host = os.environ.get("APP_HOST", "127.0.0.1")
         auto_reload = os.environ.get("AUTO_RELOAD_ENABLED", "false").lower() == "true"
 
-        redis_host = os.environ.get("REDIS_HOST")
-        redis_port = int(os.environ.get("REDIS_PORT"))
-        redis_password = os.environ.get("REDIS_PASSWORD")
+        redis_host = os.environ.get("REDIS_HOST", "127.0.0.1")
+        redis_port = int(os.environ.get("REDIS_PORT", "6379"))
+        redis_password = os.environ.get("REDIS_PASSWORD", "")
 
         return cls(
             name,
