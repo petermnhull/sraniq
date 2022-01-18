@@ -1,5 +1,6 @@
 import json
 from sanic import Sanic
+from fakeredis import FakeRedis
 
 
 class TestTaskDetail:
@@ -28,3 +29,12 @@ class TestTaskDetail:
 
         actual = json.loads(response.body)
         assert actual["message"] == "no task associated to id"
+
+    @staticmethod
+    def test_get_redis_error(app: Sanic):
+        app.ctx.redis = FakeRedis(connected=False)
+        _, response = app.test_client.get("/task/123abc")
+        assert response.status == 500
+
+        actual = json.loads(response.body)
+        assert actual == {"message": "failed to connect to task broker"}

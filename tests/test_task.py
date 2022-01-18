@@ -1,7 +1,9 @@
+from sraniq.http_client import HTTPClient
 from sraniq.views.task import Task
 
 
-def test_task():
-    task = Task("test")
-    result = task.run(10)
-    assert result == "2130"
+class TestTask:
+    def test_task(self, http_client: HTTPClient):
+        task = Task(http_client)
+        result = task.run("hello")
+        assert result == "15"

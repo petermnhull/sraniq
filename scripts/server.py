@@ -2,6 +2,7 @@ from redis import Redis
 
 from sraniq.app import build_app
 from sraniq.config import AppConfig, AppContext
+from sraniq.http_client import HTTPClient
 
 
 def main():
@@ -12,9 +13,11 @@ def main():
         port=config.redis_port,
         password=config.redis_password,
     )
+    http_client = HTTPClient()
     ctx = AppContext(
         config,
         redis,
+        http_client,
     )
     app = build_app(ctx)
     app.run(

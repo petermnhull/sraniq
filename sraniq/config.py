@@ -3,6 +3,8 @@ from dataclasses import dataclass
 import redis
 from redis import Redis
 
+from sraniq.http_client import HTTPClient
+
 TASK_QUEUE_NAME = "tasks"
 
 
@@ -42,13 +44,10 @@ class AppConfig:
 
 
 class AppContext:
-    def __init__(
-        self,
-        config: AppConfig,
-        redis: Redis,
-    ):
+    def __init__(self, config: AppConfig, redis: Redis, http_client: HTTPClient):
         self.config = config
         self.redis = redis
+        self.http_client = http_client
 
     def health(self) -> bool:
         try:

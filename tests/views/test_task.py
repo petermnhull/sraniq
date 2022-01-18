@@ -1,4 +1,5 @@
 import json
+from fakeredis import FakeRedis
 from typing import Dict
 from sanic import Sanic
 
@@ -11,6 +12,15 @@ class TestTask:
 
         actual = json.loads(response.body)
         assert actual["id"]
+
+    @staticmethod
+    def test_post_redis_error(app: Sanic):
+        app.ctx.redis = FakeRedis(connected=False)
+        _, response = app.test_client.post("/task")
+        assert response.status == 500
+
+        actual = json.loads(response.body)
+        assert actual == {"message": "failed to connect to task broker"}
 
     @staticmethod
     def test_get_no_tasks(app: Sanic):
@@ -36,3 +46,12 @@ class TestTask:
         actual = json.loads(response.body)
         expected: Dict = {"ids": [id]}
         assert actual == expected
+
+    @staticmethod
+    def test_get_redis_error(app: Sanic):
+        app.ctx.redis = FakeRedis(connected=False)
+        _, response = app.test_client.get("/task")
+        assert response.status == 500
+
+        actual = json.loads(response.body)
+        assert actual == {"message": "failed to connect to task broker"}
