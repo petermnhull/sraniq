@@ -8,6 +8,8 @@ sanic = "*"
 rq = "*"
 redis = "*"
 types-redis = "*"
+requests = "*"
+types-requests = "*"
 
 [dev-packages]
 black = "*"
