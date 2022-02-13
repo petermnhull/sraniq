@@ -9,6 +9,8 @@ def test_config():
     mp.setenv("APP_PORT", "8000")
     mp.setenv("APP_HOST", "host")
     mp.setenv("AUTO_RELOAD_ENABLED", "false")
+    mp.setenv("ACCESS_LOG_ENABLED", "false")
+    mp.setenv("DEBUG_ENABLED", "false")
     mp.setenv("REDIS_HOST", "redis")
     mp.setenv("REDIS_PORT", "6379")
     mp.setenv("REDIS_PASSWORD", "")
@@ -18,6 +20,8 @@ def test_config():
         "test name",
         8000,
         "host",
+        False,
+        False,
         False,
         "redis",
         6379,

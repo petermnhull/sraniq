@@ -24,6 +24,8 @@ def main():
         port=config.port,
         host=config.host,
         auto_reload=config.auto_reload,
+        access_log=config.access_log,
+        debug=config.debug,
     )
 
 

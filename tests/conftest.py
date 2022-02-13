@@ -17,6 +17,8 @@ def config() -> AppConfig:
         8080,
         "host",
         False,
+        False,
+        False,
         "redis",
         6379,
         "",
