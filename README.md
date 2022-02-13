@@ -26,6 +26,8 @@ This was developed on Ubuntu 20.04 with Python 3.8.10 and Docker 20.10.12.
 | `APP_PORT`            | `8000`              |
 | `APP_HOST`            | `127.0.0.1`         |
 | `AUTO_RELOAD_ENABLED` | `false`             |
+| `ACCESS_LOG_ENABLED`  | `false`             |
+| `DEBUG_ENABLED`       | `false`             |
 | `REDIS_HOST`          | `127.0.0.1`         |
 | `REDIS_PORT`          | `6379`              |
 | `REDIS_PASSWORD`      |                     |
