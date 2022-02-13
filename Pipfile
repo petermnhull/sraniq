@@ -10,6 +10,7 @@ redis = "*"
 types-redis = "*"
 requests = "*"
 types-requests = "*"
+sanic-json-logging = "*"
 
 [dev-packages]
 black = "*"
