@@ -1,5 +1,5 @@
 # sraniq
-Sanic and RQ proof of concept application.
+Sanic and RQ proof of concept application. I've never had a fun time using Celery, especially on K8s. So this is a quick project to see if I can use something else.
 
 - Lightweight and simple alternative to Celery and Flask.
 - Extremely easy to test using `sanic-testing` and `fakeredis`.
