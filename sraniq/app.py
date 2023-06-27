@@ -1,5 +1,5 @@
 from sanic import Sanic
-from sanic_json_logging import setup_json_logging
+from sanic_json_logging import setup_json_logging  # type: ignore
 
 
 from sraniq.views import IndexView, TaskView, TaskDetailView
