@@ -1,6 +1,6 @@
 from unittest.mock import MagicMock
 import pytest
-from fakeredis import FakeRedis, FakeStrictRedis
+from fakeredis import FakeStrictRedis
 
 from sanic.app import Sanic
 from sraniq.app import build_app
@@ -27,8 +27,8 @@ def config() -> AppConfig:
 
 
 @pytest.fixture
-def redis() -> FakeRedis:
-    return FakeRedis(connected=True)
+def redis() -> FakeStrictRedis:
+    return FakeStrictRedis(connected=True)
 
 
 @pytest.fixture
