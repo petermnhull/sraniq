@@ -4,9 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-sanic = "*"
+sanic = ">=23.3.0"
 rq = "*"
-redis = "*"
+redis = ">=4.6.0"
 types-redis = "*"
 requests = "*"
 types-requests = "*"
@@ -21,7 +21,7 @@ sanic-testing = "*"
 mypy = "*"
 mock = "*"
 types-mock = "*"
-fakeredis = "*"
+fakeredis = ">=2.15.0"
 
 [pipenv]
 allow_prereleases = true
