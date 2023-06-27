@@ -1,25 +1,25 @@
 #!make
 
 server:
-	pipenv run python3 -m scripts.server 
+	python -m scripts.server 
 
 worker:
-	pipenv run python3 -m scripts.worker
+	python -m scripts.worker
 
 redis:
 	docker-compose up -d redis
 
 test:
-	pipenv run coverage run --source sraniq/ -m pytest tests/
-	pipenv run coverage report
+	coverage run --source sraniq/ -m pytest tests/
+	coverage report
 
 black:
-	pipenv run black . --line-length=100
+	black . --line-length=100
 
 lint:
-	pipenv run flake8 . --max-line-length=100
+	flake8 . --max-line-length=100
 
 mypy:
-	pipenv run mypy .
+	mypy .
 
 fmt: black mypy lint
