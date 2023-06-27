@@ -1,6 +1,7 @@
 import json
 from sanic import Sanic
-from fakeredis import FakeStrictRedis
+
+from tests.common import get_disconnected_redis
 
 
 def test_index_healthy(app: Sanic):
@@ -16,8 +17,7 @@ def test_index_healthy(app: Sanic):
 
 
 def test_index_redis_ping_fails(app: Sanic):
-    redis = FakeStrictRedis(connected=False)
-    app.ctx.redis = redis
+    app.ctx.redis = get_disconnected_redis()
     _, response = app.test_client.get("/")
     assert response.status == 500
 

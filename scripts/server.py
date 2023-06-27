@@ -26,6 +26,7 @@ def main():
         auto_reload=config.auto_reload,
         access_log=config.access_log,
         debug=config.debug,
+        single_process=True,
     )
 
 

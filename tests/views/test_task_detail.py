@@ -1,6 +1,7 @@
 import json
 from sanic import Sanic
-from fakeredis import FakeRedis
+
+from tests.common import get_disconnected_redis
 
 
 class TestTaskDetail:
@@ -32,7 +33,7 @@ class TestTaskDetail:
 
     @staticmethod
     def test_get_redis_error(app: Sanic):
-        app.ctx.redis = FakeRedis(connected=False)
+        app.ctx.redis = get_disconnected_redis()
         _, response = app.test_client.get("/task/123abc")
         assert response.status == 500
 
