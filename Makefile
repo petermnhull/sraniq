@@ -9,6 +9,12 @@ worker:
 redis:
 	docker-compose up -d redis
 
+poetryconf:
+	poetry config virtualenvs.create false
+
+poetryinstall:
+	poetry install --no-root
+
 test:
 	coverage run --source sraniq/ -m pytest tests/
 	coverage report
